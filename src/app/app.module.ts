@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { MyDatePickerModule } from 'mydatepicker';
 import {CheckboxModule} from 'primeng/checkbox';
 import { HttpClientModule} from '@angular/common/http';
+import { ConflictFormComponent } from './conflict-form/conflict-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,8 @@ import { HttpClientModule} from '@angular/common/http';
     DoctorWeekComponent,
     DoctorDayComponent,
     DoctorSpecialDayComponent,
-    Screen1Component
+    Screen1Component,
+    ConflictFormComponent
   ],
   imports: [
     HttpClientModule,
@@ -41,7 +43,7 @@ import { HttpClientModule} from '@angular/common/http';
     NgDragDropModule.forRoot(),
     RouterModule.forRoot([
       {
-        path: 'Screen1',
+        path: 'screen1',
         component: Screen1Component
       },
       {

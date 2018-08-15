@@ -11,6 +11,8 @@ import {MonthSchedulerComponent} from '../month-scheduler/month-scheduler.compon
 })
 export class Screen1Component implements OnInit {
 
+
+  ConflictView = true;
   DoctorViewClicked;
   SelectItem = false;
   public myDatePickerOptions: IMyDpOptions = {

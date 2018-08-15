@@ -1,0 +1,6 @@
+.form-container{
+    height: 90%;
+    background-color: ghostwhite;
+    box-shadow: -5px 5px 5px 0px rgba(0, 0, 0, 0.686);
+    border-radius: 20px;
+}
