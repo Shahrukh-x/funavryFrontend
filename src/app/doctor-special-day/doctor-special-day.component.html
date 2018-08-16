@@ -1,60 +1,76 @@
-<html>
-
-
-
-  <div class="column2" style="background-color:#ccc;">
-
-
-    <div class="dropdown">
-      <button class="dropbtn">{{DoctorBox}}</button>
-      <div class="dropdown-content">
-        <a (click)=" UpdateDoctor(item)" *ngFor="let item of AllDoctors">{{item}}</a>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="header">  <!-- Header Div  -->
-    <a class="logo">{{TodayDate}}</a>
-  </div>
-
-
-
-
-  <div>
-    <table>
-      <thead>
-        <tr>
-          <td style="text-align: center">
-            {{DocName}}
-          </td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td *ngFor="let check of currentDoctor">
-            <div>
-              <table>
-                    <tr *ngFor="let item of [0,1,2,3]">
-                      <td *ngFor="let number of [0,1,2,3]">
-                        <div>
-                          {{returnItem()}}
+<div>
+  <table style="width: 100%">
+    <tr>
+      <td>
+        <table style="width:100%">
+          <tr>
+            <td style="width:100%; background-color: gainsboro; border-radius: 4px">
+              <a style="border: 4px solid white; border-radius: 100%; padding-right: 0.5%; padding-left: 0.5%"><i class="fas fa-chevron-left" style="color: white"></i></a>
+              <a style="width:100%; font-weight: 600; font-size: 120%; color: ghostwhite; padding-right: 0.5%; padding-left: 0.5%">{{TodayDate}}</a>
+              <a style="border: 4px solid white; border-radius: 100%; padding-right: 0.5%; padding-left: 0.5%"><i class="fas fa-chevron-right" style="color: white"></i></a>
+            </td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-success dropdown-toggle">
+                  <i class="fas fa-user-md"></i>
+                  Doctors
+                </button>
+                <div class="dropdown-content">
+                  <a (click)=" UpdateDoctor(item)" *ngFor="let item of AllDoctors">{{item}}</a>
+                </div>
+              </div>
+            </td>
+            <td>
+              <button class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i>
+                Remove
+              </button>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-left: 1%; padding-right: 1%;">
+        <table>
+          <tr>
+            <td style="text-align: center; background-color: brown; color: white; font-weight: 600; font-size: 120%; border-radius: 4px">
+              {{DocName}}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-left: 1%; padding-right: 1%;">
+        <table>
+          <tbody>
+            <tr>
+              <td *ngFor="let check of currentDoctor">
+                <div>
+                  <table>
+                    <tr *ngFor="let item of counter(totalHours)">
+                      <td *ngFor="let number of counter(unitsPerHour)" style="padding: 0.1%">
+                        <div style="background-color: lightgreen; border-radius: 8px; color:white;" >
+                          <div>&nbsp;
+                            9:00 AM
+                          </div>
+                          <div style="margin-bottom: 0; width: fit-content; display: inline-block; background-color: forestgreen; border-radius: 8px; padding-left: 30%; padding-right: 32%;"  (click)="alertFun()">
+                            PatientName
                         </div>
-                        <div style="border: 1px solid; width: fit-content; display: inline-block"  (click)="alertFun()">
-                          PatientName
+                        
+                        <div style="float: right; padding-right: 2%">
+                          <input type="checkbox" (change)="changefunc($event)"></div>
                         </div>
                       </td>
                     </tr>
-              </table>
-            </div>
-          </td>
-
-        </tr>
-      </tbody>
-    </table>
-
-  </div>
-
-
-
-</html>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>

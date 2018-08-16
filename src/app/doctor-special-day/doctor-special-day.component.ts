@@ -16,38 +16,28 @@ export class DoctorSpecialDayComponent implements OnInit {
   currentDoctor;
   AllDoctors;
   FullHours;
+  totalHours;
+  unitsPerHour = 4;
+  startTime;
   constructor() { }
 
   ngOnInit() {
     this.CurrentIndex = 0;
     this.currentDoctor = [];
-    this.AllDoctors = ['Dr shahrukh' , 'Dr Howdy' , 'Dr ChicoChina' , 'Dr Shirza Firtas']
+    this.AllDoctors = ['Dr shahrukh' , 'Dr Howdy' , 'Dr ChicoChina' , 'Dr Shirza Firtas'];
     this.DoctorBox = 'Select Doctor';
     this.TodayDate = moment().format('YYYY-MMMM-DD');
-    this.FullHours = ['9:00 ' ,
-      '9:15  ' ,
-      '9:30  ' ,
-      '9:45  ' ,
-      '10:00  ' ,
-      '10:15  ' ,
-      '11:30  ' ,
-      '11:45  ' ,
-      '12:00  ' ,
-      '12:15  ' ,
-      '12:30  ' ,
-      '12:45  ' ,
-      '1:00  ' ,
-      '1:15  '
-    ];
+    this.FullHours = [];
+    this.totalHours = 10;
   }
 
-  UpdateDoctor(Doc){
+  UpdateDoctor(Doc) {
     this.DocName = Doc;
     this.DoctorBox = Doc;
-    if (this.currentDoctor.lenght === 0){
+    if (this.currentDoctor.lenght === 0) {
       this.currentDoctor.push(Doc);
-    } else{
-      this.currentDoctor.splice(0,1);
+    } else {
+      this.currentDoctor.splice(0, 1);
       this.currentDoctor.push(Doc);
     }
     this.CurrentIndex = 0;
@@ -58,8 +48,20 @@ export class DoctorSpecialDayComponent implements OnInit {
       return this.FullHours[this.CurrentIndex];
   }
 
-  alertFun(){
+  alertFun() {
     alert('called');
     this.CurrentIndex = 0;
+  }
+
+  counter(length) {
+    return new Array(length);
+  }
+
+  changefunc(event) {
+    if (event.currentTarget.checked) {
+      alert('checked');
+    } else {
+      alert('unchecked');
+    }
   }
 }
