@@ -8,6 +8,8 @@ import * as moment from 'moment';
 })
 export class DoctorDayComponent implements OnInit {
 
+
+
   DoctorBox = 'Select Doctor';
   AllClincis;
   AllDoctors;

@@ -4,6 +4,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class AjaxRequestServiceService {
 
 
@@ -19,7 +21,7 @@ export class AjaxRequestServiceService {
 
   AjaxRequestForAllDoctorsList (){
     this.ListOfAllDoctors = ['Dr.shahrukh', 'Dr. Machine Gun', 'Dr.Alanto', 'Dr.Howdy' , 'Dr.GoldenDragon'];
-    return this.Http.get(this.url).subscribe(data => (console.log(data)));
+    // return this.Http.get(this.url).subscribe(data => (console.log(data)));
   }
 
 

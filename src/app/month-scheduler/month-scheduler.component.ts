@@ -3,7 +3,6 @@ import * as moment from 'moment';
 import {Appointments} from '../appointments';
 import {forEach} from '@angular/router/src/utils/collection';
 import {$NBSP} from 'codelyzer/angular/styles/chars';
-import {ScreenScedulerSharedDateServiceService} from '../screen-sceduler-shared-date-service.service';
 
 @Component({
   selector: 'app-month-scheduler',
@@ -30,7 +29,14 @@ export class MonthSchedulerComponent implements OnInit {
   TotalDays;
   MDays;
   TempIds;
-  constructor(public MonthScreenShareData: ScreenScedulerSharedDateServiceService ) { }
+
+  @Input() SelectedDoctors;
+  @Input() SelectedClinics;
+
+  constructor( ) {
+    this.SelectedDoctors = [];
+    this.SelectedClinics = [];
+  }
 
 
   ngOnInit() {
@@ -105,17 +111,17 @@ export class MonthSchedulerComponent implements OnInit {
   }
 
   DeleteXResource( ClinicName) {
-      for ( let i = 0; i < this.MonthScreenShareData.ClinicsList.length ; i++) {
-        if ( this.MonthScreenShareData.ClinicsList[i] === ClinicName.target.innerText) {
-          this.MonthScreenShareData.ClinicsList.splice(i , 1);
+      for ( let i = 0; i < this.SelectedClinics.length ; i++) {
+        if ( this.SelectedClinics[i] === ClinicName.target.innerText) {
+          this.SelectedClinics.splice(i , 1);
         }
       }
   }
 
   DeleteYResource( DoctorName) {
-    for ( let i = 0; i < this.MonthScreenShareData.DoctorsList.length ; i++) {
-      if ( this.MonthScreenShareData.DoctorsList[i] === DoctorName.target.innerText ) {
-        this.MonthScreenShareData.DoctorsList.splice(i , 1);
+    for ( let i = 0; i < this.SelectedDoctors.length ; i++) {
+      if ( this.SelectedDoctors[i] === DoctorName.target.innerText ) {
+        this.SelectedDoctors.splice(i , 1);
       }
     }
   }

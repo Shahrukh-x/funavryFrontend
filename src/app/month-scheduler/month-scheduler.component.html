@@ -31,7 +31,7 @@
                     </tr>
                   </table>
                 </td>
-                <td *ngFor="let ResourceClinic of MonthScreenShareData.ClinicsList">
+                <td *ngFor="let ResourceClinic of SelectedClinics">
                   <div >
                     <table>
                       <thead>
@@ -63,7 +63,7 @@
                         &nbsp;
                       </td>
                     </tr>
-                    <tr *ngFor="let ResourceDoctor of MonthScreenShareData.DoctorsList" >
+                    <tr *ngFor="let ResourceDoctor of SelectedDoctors" >
                       <td *ngIf="HideResources == true" (click)="DeleteYResource($event)" style="cursor: pointer">
                         <div style=" overflow: hidden; white-space: nowrap; background-color: white">{{ResourceDoctor}}</div>
                       </td>
@@ -71,7 +71,7 @@
                     </tbody>
                   </table>
                 </td>
-                <td *ngFor="let ClinicName of MonthScreenShareData.ClinicsList"> {{RefreshDaysCounter()}}
+                <td *ngFor="let ClinicName of SelectedClinics"> {{RefreshDaysCounter()}}
                   <div>
                     <table>
                       <thead>
@@ -83,7 +83,7 @@
                       <tr>
                         <th  *ngFor="let item of weeks">{{DaysInMonth[TotalDays]}} {{incrementDay()}}</th>
                       </tr>
-                      <tr *ngFor="let DocName of MonthScreenShareData.DoctorsList" >
+                      <tr *ngFor="let DocName of SelectedDoctors" >
                         <th  style="overflow: hidden; max-width: 10px" *ngFor="let item of weeks; let k = index"  [ngSwitch]="returnItem(DocName,(k+1) + (7 * DivNumber) ,ClinicName)"  >
                           <div id="EmptyCell" droppable  (onDrop)="onItemDrop($event,DocName,(k+1) + (7 * DivNumber) ,ClinicName)"  *ngSwitchCase="'.'" style="overflow: hidden;white-space: nowrap; background-color: white" [contextMenu]="NoEventContext"  (click)="EmptyBoxClicked(DocName,ClinicName,(k+1) + (7 * DivNumber))">	&nbsp;  </div>
                           <context-menu #EventContext>
@@ -129,6 +129,5 @@
   </div>
 
 </div>
-
 
 
