@@ -12,6 +12,7 @@ import {ContextMenuModule} from 'ngx-contextmenu';
 import {DialogModule} from 'primeng/dialog';
 import { NgDragDropModule } from 'ng-drag-drop';
 import { DoctorSpecialDayComponent } from './doctor-special-day/doctor-special-day.component';
+import { ResizableModule } from 'angular-resizable-element';
 import * as $ from 'jquery';
 import { Screen1Component } from './screen1/screen1.component';
 import { FormsModule } from '@angular/forms';
@@ -19,6 +20,8 @@ import { MyDatePickerModule } from 'mydatepicker';
 import {CheckboxModule} from 'primeng/checkbox';
 import { HttpClientModule} from '@angular/common/http';
 import { ConflictFormComponent } from './conflict-form/conflict-form.component';
+import { ResizableDivDirective } from './doctor-day/resizable-div.directive';
+import { EventContainerDirective } from './doctor-day/event-container.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +33,9 @@ import { ConflictFormComponent } from './conflict-form/conflict-form.component';
     DoctorDayComponent,
     DoctorSpecialDayComponent,
     Screen1Component,
-    ConflictFormComponent
+    ConflictFormComponent,
+    ResizableDivDirective,
+    EventContainerDirective,
   ],
   imports: [
     HttpClientModule,
@@ -39,6 +44,7 @@ import { ConflictFormComponent } from './conflict-form/conflict-form.component';
     FormsModule,
     BrowserModule,
     DialogModule,
+    ResizableModule,
     ContextMenuModule.forRoot(),
     NgDragDropModule.forRoot(),
     RouterModule.forRoot([
