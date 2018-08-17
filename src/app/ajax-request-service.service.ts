@@ -24,7 +24,7 @@ export class AjaxRequestServiceService {
 
   AjaxRequestForAllDoctorsList (){
     this.ListOfAllSpecialities = ['Medical', 'Accu', 'PT', 'Chiropractic'];
-    return this.Http.get(this.Geturl).subscribe(data => (console.log(data)));
+    // return this.Http.get(this.Geturl).subscribe(data => (console.log(data)));
   }
 
 
@@ -34,9 +34,9 @@ export class AjaxRequestServiceService {
 
 
   AjaxRequestForRetrievingAssignments(){
-     return this.Http.get(this.PostUrl).subscribe(data => {
-     console.log(data);
-    });
+    //  return this.Http.get(this.PostUrl).subscribe(data => {
+    //  console.log(data);
+    // });
 
 
   }
