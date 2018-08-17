@@ -35,8 +35,8 @@ export class AjaxRequestServiceService {
 
   AjaxRequestForRetrievingAssignments(){
     //  return this.Http.get(this.PostUrl).subscribe(data => {
-     console.log(data);
-    });
+    //  console.log(data);
+    // });
 
 
   }

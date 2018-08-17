@@ -1,9 +1,12 @@
 
+<!--{{TotalDaysAndOffset}}-->
+<!--{{MDays}}-->
+<!--{{getMonthOffset()}}-->
+<!--{{TotalDaysPortion}}-->
 
 <div>
 
 <div class="column2" style="background-color:#ccc;">
-
 
   <div class="logo">
     <button class="btn " disabled style=" background-color: royalblue; color: white">{{Month}} {{MonthName}} {{MDays}}</button>
@@ -32,13 +35,17 @@
                     </tr>
                   </table>
                 </td>
-                <td *ngFor="let ResourceClinic of SelectedClinics">
+                <td *ngFor="let ResourceClinic of SelectedClinics.length === 0? ['No Clinic Selected']: SelectedClinics">
                   <div >
                     <table>
                       <thead>
                       <tr>
                         <td colspan="7"  style="cursor: pointer" (click)="DeleteXResource($event)" >
-                          <div style=" overflow: hidden; white-space: nowrap; background-color: white">{{ResourceClinic}}</div>
+                          <div style=" overflow: hidden; white-space: nowrap; background-color: white">
+                            <div >
+                              {{ResourceClinic}}
+                            </div>
+                          </div>
                         </td>
                       </tr>
                       </thead>
@@ -58,62 +65,72 @@
                       </td>
                     </tr>
                     </thead>
-                    <tbody *ngFor="let item of TotalDaysPortion">
+                    <tbody *ngFor="let item of AuxillaryFunction(TotalDaysPortion)">
                     <tr>
-                      <td (click)="ShowAndHideResources()">
+                      <td >
                         &nbsp;
                       </td>
                     </tr>
                     <tr *ngFor="let ResourceDoctor of SelectedSpecialities" >
-                      <td *ngIf="HideResources == true" (click)="DeleteYResource($event)" style="cursor: pointer">
+                      <td (click)="DeleteYResource($event)" style="cursor: pointer">
                         <div style=" overflow: hidden; white-space: nowrap; background-color: white">{{ResourceDoctor}}</div>
                       </td>
                     </tr>
                     </tbody>
                   </table>
                 </td>
-                <td *ngFor="let ClinicName of SelectedClinics"> {{RefreshDaysCounter()}}
+                <td *ngFor="let ClinicName of SelectedClinics.length === 0? ['No Clinic Selected']: SelectedClinics"> {{RefreshDaysCounter()}}
                   <div>
                     <table>
                       <thead>
                       <tr>
-                        <th *ngFor="let item of weeks">{{item}}</th>
+                        <th *ngFor="let Weekname of weeks">{{Weekname}}</th>
                       </tr>
                       </thead>
-                      <tbody *ngFor="let item of TotalDaysPortion; let DivNumber = index" >
-                      <tr>
-                        <th  *ngFor="let item of weeks">{{DaysInMonth[TotalDays]}} {{incrementDay()}}</th>
-                      </tr>
-                      <tr *ngFor="let DocName of SelectedSpecialities" >
-                        <th  style="overflow: hidden; max-width: 10px" *ngFor="let item of weeks; let k = index"  [ngSwitch]="returnItem(DocName,(k+1) + (7 * DivNumber) ,ClinicName)"  >
-                          <div id="EmptyCell" droppable  (onDrop)="onItemDrop($event,DocName,(k+1) + (7 * DivNumber) ,ClinicName)"  *ngSwitchCase="'.'" style="overflow: hidden;white-space: nowrap; background-color: white" [contextMenu]="NoEventContext"  (click)="EmptyBoxClicked(DocName,ClinicName,(k+1) + (7 * DivNumber))">	&nbsp;  </div>
-                          <context-menu #EventContext>
-                            <ng-template contextMenuItem (execute)="CopyElement(returnItem(DocName,(k+1) + (7 * DivNumber) ,ClinicName).AppId)" >
-                              copy
-                            </ng-template>
-                            <ng-template contextMenuItem (execute)="PasteElement(DocName , (k+1) + (7 * DivNumber)  , ClinicName )" >
-                              paste
-                            </ng-template>
-                            <ng-template contextMenuItem (execute)="DeleteElement(DocName,(k+1) + (7 * DivNumber) ,ClinicName)" >
-                              Delete
-                            </ng-template>
-                          </context-menu>
-                          <div  id ="FullCell" class="wrapper" draggable dragData="{{returnItem(DocName,(k+1) + (7 * DivNumber) ,ClinicName).DoctorName}}" droppable (onDrop)="onItemDrop($event)" *ngSwitchDefault style="overflow: hidden; white-space:nowrap; background-color: yellow" [contextMenu]="EventContext"  (click)="EventBoxClicked($event,DocName,ClinicName,(k+1) + (7 * DivNumber) )">
-                            <div class="row" style=" overflow: hidden;">
-                              <div  *ngFor="let item of TestArr" style=" overflow: hidden">
-                                {{(returnItem(DocName,(k+1) + (7 * DivNumber) ,ClinicName).DoctorName)}}
+                      <tbody *ngFor="let FirstPortion of AuxillaryFunction(TotalDaysPortion); let DivNumber = index" >
+                          <tr>
+                            <th *ngFor="let DaysInARow of weeks" [ngSwitch]="ReturnOffsetForStartingDay(EmptySpaces)"> {{IncrementEmptySpaces()}}
+                              <div *ngSwitchCase="false">
+                                &nbsp;
                               </div>
-                            </div>
-                          </div>
+                              <div *ngSwitchCase="true">
+                                {{DaysInMonth[TotalDays]}} {{incrementDay()}}
+                              </div>
+                            </th>
+                          </tr>
+                          <tr *ngFor="let DocName of SelectedSpecialities" >
 
-                          <context-menu #NoEventContext>
-                            <ng-template contextMenuItem (execute)="PasteElement(DocName , (k+1) + (7 * DivNumber)  , ClinicName )" >
-                              paste
-                            </ng-template>
-                          </context-menu>
+                            <th style=" overflow: hidden; max-width: 10px" *ngFor="let item of weeks; let k = index"  [ngSwitch]="returnItem(DocName,(k+1) + (7 * DivNumber) ,ClinicName)"  >
+                              <div id="EmptyCell" droppable  (onDrop)="onItemDrop($event,DocName,(k+1) + (7 * DivNumber) ,ClinicName)"  *ngSwitchCase="false" style="overflow: hidden;white-space: nowrap; background-color: white" [contextMenu]="NoEventContext"  (click)="EmptyBoxClicked(DocName,ClinicName,(k+1) + (7 * DivNumber))">	&nbsp;  </div>
+                              <context-menu #EventContext>
+                                <ng-template contextMenuItem (execute)="CopyElement(returnItem(DocName,(k+1) + (7 * DivNumber) ,ClinicName).SpecialityAssignmentId)" >
+                                  copy
+                                </ng-template>
+                                <ng-template contextMenuItem (execute)="PasteElement(DocName , (k+1) + (7 * DivNumber)  , ClinicName )" >
+                                  paste
+                                </ng-template>
+                                <ng-template contextMenuItem (execute)="DeleteElement(DocName,(k+1) + (7 * DivNumber) ,ClinicName)" >
+                                  Delete
+                                </ng-template>
+                              </context-menu>
 
-                        </th>
-                      </tr>
+
+                              <div  id ="FullCell" class="wrapper" draggable dragData="{{returnItem(DocName,(k+1) + (7 * DivNumber) ,ClinicName).Date}}" droppable (onDrop)="onItemDrop($event)" *ngSwitchDefault style="overflow: hidden; white-space:nowrap; background-color: yellow" [contextMenu]="EventContext"  (click)="EventBoxClicked($event,DocName,ClinicName,(k+1) + (7 * DivNumber) )">
+                                <div class="row" style=" overflow: hidden;">
+                                  <div  *ngFor="let item of returnItem(DocName,(k+1) + (7 * DivNumber) ,ClinicName).DoctorName" style=" overflow: hidden">
+                                    {{item}}
+                                  </div>
+                                </div>
+                              </div>
+
+                              <context-menu #NoEventContext>
+                                <ng-template contextMenuItem (execute)="PasteElement(DocName , (k+1) + (7 * DivNumber)  , ClinicName )" >
+                                  paste
+                                </ng-template>
+                              </context-menu>
+
+                            </th>
+                          </tr>
                       </tbody>
                     </table>
 

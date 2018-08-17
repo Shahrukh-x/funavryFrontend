@@ -1,7 +1,7 @@
 export class ClinicSpecialityAssignment{
 
 
-  DoctorName;
+  DoctorName = [];
   StartTime;
   EndTime;
   NoOfDoctors;

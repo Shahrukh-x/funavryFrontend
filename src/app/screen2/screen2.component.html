@@ -1,8 +1,8 @@
 
-<div>
+<div style="padding-right: 2%; padding-left: 2%">
       <div class="topnav" style="width:100%">
         <div class="dropdown" style="float: left;" id="conflict">
-          <a type="button" class="dropbtn"  style=""><i class="fas fa-bell">
+          <a type="" class="dropbtn"  style=""><i class="fas fa-bell">
             <span class="badge badge-danger">7</span>
           </i></a>
           <div class="dropdown-content" id="conflict-dd" >
@@ -31,7 +31,7 @@
           </div>
         </div>
 
-        <a type="button" class="dropbtn"  style=""><i class="fas fa-bell">
+        <a type="" class="dropbtn"  style=""><i class="fas fa-bell">
           <span class="badge badge-danger"></span>
         </i></a>
         <a >View Calendar</a>
@@ -39,10 +39,11 @@
         <a >Waiting List</a>
       </div>
 
-        <div style="width:25%; float:left; height:auto; background-color: darkgrey; border-radius: 4px; margin-left: 0; padding: 0">
+        <div style="width:25%; float:left; height:auto; border-radius: 4px; margin-left: 0; padding: 0">
 
           <div style="width:100%; height:fit-content; padding-bottom: 30px;   background-color: white;">
-            <div class="w3-ul w3-card-4" style="width: fit-content; margin: 0 auto; padding-top: 10px" >
+            <div class="w3-ul w3-card-4" style="width: fit-content; margin: 0 auto;" >
+              <div style="text-align: center; background-color: royalblue; color: ghostwhite; height: 100%"><h2>&nbsp;</h2></div>
               <my-date-picker  name="mydate" [options]="myDatePickerOptions"
                                [(ngModel)]="model" required  (dateChanged)="onDateChanged($event)"></my-date-picker>
             </div>
@@ -55,13 +56,24 @@
 
 
               <ul id='ClinicList' class="w3-ul w3-card-4" style="background-color: #f1f1f1" >
-                <li><h2>Pateint Info</h2></li>
+                <li style="text-align: center; background-color: royalblue; color: ghostwhite"><h2>Patient Profile</h2></li>
                 <li class="w3-bar"  >
                   <img src="../../assets/avatar.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
                   <div class="w3-bar-item">
-                    <span class="w3-large">Mr Shahrukh</span><br>
-                    <span>Chart No 1000</span>
+                    <span class="w3-large" style="font-weight: 600">Mr Shahrukh</span><br>
+                    <span style="line-height: 0.5; font-size: 80%">
+                      <p>Chart 1000</p>
+                      <p>Status: Walk In</p>
+                      <p>Insurance Name: ABC</p>
+                    </span>
                   </div>
+                </li>
+                <li>
+                  <span style="line-height: 0.5; font-size: 80%">
+                    <p>Priority: Emergency</p>
+                    <p>Doctor: Dr.Adam Williams</p>
+                    <p>Appointment Time: 09:45 AM</p>
+                  </span>
                 </li>
               </ul>
 
@@ -71,7 +83,7 @@
 
         </div>
 
-
+        <br>
         <div  class="Sceduler" style="width:75%; float:left">
           <app-doctor-special-day></app-doctor-special-day>
        </div>

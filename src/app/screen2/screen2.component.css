@@ -19,9 +19,9 @@
 .Sceduler {
   overflow-scrolling: auto;
   float: left;
-  padding: 20px;
   width: 70%;
-  background-color: #f1f1f1;
+  background-color: darkgrey;
+  box-shadow: -2px 2px 10px 1px black;
   height: auto/* only for demonstration, should be removed */
 }
 
