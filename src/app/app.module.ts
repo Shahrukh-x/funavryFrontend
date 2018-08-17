@@ -22,6 +22,7 @@ import { HttpClientModule} from '@angular/common/http';
 import { ConflictFormComponent } from './conflict-form/conflict-form.component';
 import { ResizableDivDirective } from './doctor-day/resizable-div.directive';
 import { EventContainerDirective } from './doctor-day/event-container.directive';
+import { Screen2Component } from './screen2/screen2.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +37,7 @@ import { EventContainerDirective } from './doctor-day/event-container.directive'
     ConflictFormComponent,
     ResizableDivDirective,
     EventContainerDirective,
+    Screen2Component,
   ],
   imports: [
     HttpClientModule,
@@ -51,6 +53,10 @@ import { EventContainerDirective } from './doctor-day/event-container.directive'
       {
         path: 'screen1',
         component: Screen1Component
+      },
+      {
+        path: 'screen2',
+        component: Screen2Component
       },
       {
         path: 'MonthScehduler',
