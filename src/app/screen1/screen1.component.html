@@ -59,7 +59,7 @@
 
             <ul id='DoctorsList'  *ngSwitchCase="true" class="w3-ul w3-card-4" style="background-color: #f1f1f1" >
               <li><h2>Doctors</h2></li>
-              <li class="w3-bar" *ngFor="let Doctors of AllDoctorsList" >
+              <li class="w3-bar" *ngFor="let Doctors of AllSpecialitiesList" >
                 <!--<span onclick="this.parentElement.style.display='none'" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>-->
                 <span  (click)="SelectedDoctor(Doctors)" class="w3-bar-item w3-button w3-xlarge w3-right">C</span>
                 <img src="../../assets/avatar.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
@@ -92,7 +92,7 @@
 
       <div  class="Sceduler" style="width:75%; float:left">
           <!--<app-conflict-form></app-conflict-form>-->
-        <app-month-scheduler [SelectedDoctors]="SelectedDoctorsList" [SelectedClinics]="SelectedClinicList"></app-month-scheduler>
+        <app-month-scheduler [SelectedSpecialities]="SelectedSpecialitiesList" [SelectedClinics]="SelectedClinicList"></app-month-scheduler>
       </div>
 
       </div>

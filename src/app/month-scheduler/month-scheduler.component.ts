@@ -3,6 +3,8 @@ import * as moment from 'moment';
 import {Appointments} from '../appointments';
 import {forEach} from '@angular/router/src/utils/collection';
 import {$NBSP} from 'codelyzer/angular/styles/chars';
+import {AjaxRequestServiceService} from '../ajax-request-service.service';
+import {ClinicSpecialityAssignment} from '../ClinicSpecialityAssignment';
 
 @Component({
   selector: 'app-month-scheduler',
@@ -13,6 +15,8 @@ import {$NBSP} from 'codelyzer/angular/styles/chars';
 
 export class MonthSchedulerComponent implements OnInit {
 
+
+  MonthlyAssignments: Array<ClinicSpecialityAssignment> = [];
   HideResources;
   TestArr;
   ClipBoard;
@@ -30,11 +34,11 @@ export class MonthSchedulerComponent implements OnInit {
   MDays;
   TempIds;
 
-  @Input() SelectedDoctors;
+  @Input() SelectedSpecialities;
   @Input() SelectedClinics;
 
-  constructor( ) {
-    this.SelectedDoctors = [];
+  constructor(private ScehdulerAjaxRequest: AjaxRequestServiceService ) {
+    this.SelectedSpecialities = [];
     this.SelectedClinics = [];
   }
 
@@ -47,13 +51,31 @@ export class MonthSchedulerComponent implements OnInit {
     this.FindApp = false;
     this.TotalDays = 0;
     this.TotalDaysPortion = ['1', '2', '3', '4' , '5'];
-    this.weeks = moment.weekdays();
+    this.weeks = moment.weekdaysShort();
     this.eventsD1 = [ '9:30-10:30' , '10:30-11:30', '12:30-1:30', '2:30-3:30'] ;
     this.speciality = ['1', '1' , '2'];
     this.MonthName = moment().month(this.Month).format('MMMM');
     this.MDays = moment(this.Year+"-"+(this.Month+1), "YYYY-MM").daysInMonth();
     this.weeks = this.createWeekDays();
     this.PopulateMonth();
+  }
+
+  RetrieveMonthlyAssignments(){
+    this.ScehdulerAjaxRequest.AjaxRequestForRetrievingAssignments();
+
+    let TempVar: ClinicSpecialityAssignment = new ClinicSpecialityAssignment();
+    TempVar.DoctorName = 'Dr-Shahrukh';
+    TempVar.StartTime = '10:30';
+    TempVar.EndTime = '11:30'
+    TempVar.ClinicId = '2';
+    TempVar.NoOfDoctors = 2;
+    TempVar.ReccurenceID = 4;
+    TempVar.SpecialityId = 5;
+    TempVar.SpecialityAssignmentId = 3;
+    TempVar.SupervisorID = 10;
+    TempVar.Date = 10;
+    this.MonthlyAssignments.push(TempVar);
+
   }
   //  function used to populate the month
   PopulateMonth() {
@@ -65,6 +87,7 @@ export class MonthSchedulerComponent implements OnInit {
     }
   }
   ChangeMonth() {
+    this.RetrieveMonthlyAssignments();
     this.TotalDays = 0;
     if(this.Month==11){
       this.Month=0;
@@ -76,7 +99,6 @@ export class MonthSchedulerComponent implements OnInit {
     this.MonthName = moment().month(this.Month).format('MMMM');
     this.weeks = moment.weekdays();
     this.MDays = moment(this.Year+"-"+(this.Month+1), "YYYY-MM").daysInMonth();
-    console.log('week'+this.weeks);
     this.PopulateMonth();
   }
   getMonthOffset(){
@@ -93,12 +115,10 @@ export class MonthSchedulerComponent implements OnInit {
   returnItem(Doctor , Date, Clinic) {
     this.FindApp = false;
 
-    for ( let i =  0 ; i < this.MonthAppointments.length ; i++){
-      if (this.MonthAppointments[i].DoctorName === Doctor &&
-        this.MonthAppointments[i].ClinicName === Clinic &&
-        this.MonthAppointments[i].Date === Date ){
+    for ( let i =  0 ; i < this.MonthlyAssignments.length ; i++){
+      if ( this.MonthlyAssignments[i].Date === Date ){
         this.FindApp = true;
-        return this.MonthAppointments[i];
+        return this.MonthlyAssignments[i];
       }
     }
 
@@ -119,16 +139,16 @@ export class MonthSchedulerComponent implements OnInit {
   }
 
   DeleteYResource( DoctorName) {
-    for ( let i = 0; i < this.SelectedDoctors.length ; i++) {
-      if ( this.SelectedDoctors[i] === DoctorName.target.innerText ) {
-        this.SelectedDoctors.splice(i , 1);
+    for ( let i = 0; i < this.SelectedSpecialities.length ; i++) {
+      if ( this.SelectedSpecialities[i] === DoctorName.target.innerText ) {
+        this.SelectedSpecialities.splice(i , 1);
       }
     }
   }
 
   createWeekDays(){
     if(this.getMonthOffset()==0){
-      return moment.weekdays();
+      return moment.weekdaysShort();
     }
     else if(this.getMonthOffset()==1){
       return ['Mon', 'Tues','Wed','Thur','Fri','Sat','Sun'];
@@ -140,7 +160,7 @@ export class MonthSchedulerComponent implements OnInit {
       return ['Wed','Thur','Fri','Sat','Sun','Mon', 'Tue'];
     }
     else if(this.getMonthOffset()==4){
-      return ['Thur','Friday','Sat','Sun','Mon', 'Tue','Wed'];
+      return ['Thur','Fri','Sat','Sun','Mon', 'Tue','Wed'];
     }
     else if(this.getMonthOffset()==5){
       return ['Fri','Sat','Sun','Mon', 'Tues','Wed','Thur'];
@@ -217,6 +237,5 @@ export class MonthSchedulerComponent implements OnInit {
       this.HideResources = true;
     }
   }
-
 
 }

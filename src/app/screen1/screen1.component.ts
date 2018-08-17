@@ -12,10 +12,10 @@ export class Screen1Component implements OnInit {
 
 
 
-  AllDoctorsList;
+  AllSpecialitiesList;
   AllClinicList;
 
-  SelectedDoctorsList;
+  SelectedSpecialitiesList;
   SelectedClinicList;
 
   Con1flictView = true;
@@ -34,9 +34,9 @@ export class Screen1Component implements OnInit {
 
   ngOnInit() {
     this.AllClinicList = this.Screen1Ajaxrequest.ListOfAllClinics;
-    this.AllDoctorsList = this.Screen1Ajaxrequest.ListOfAllDoctors;
+    this.AllSpecialitiesList = this.Screen1Ajaxrequest.ListOfAllSpecialities;
     this.DoctorViewClicked = true;
-    this.SelectedDoctorsList = [];
+    this.SelectedSpecialitiesList = [];
     this.SelectedClinicList = [];
   }
 
@@ -47,7 +47,7 @@ export class Screen1Component implements OnInit {
   }
 
   SelectedDoctor(DoctorName){
-    this.SelectedDoctorsList.push(DoctorName);
+    this.SelectedSpecialitiesList.push(DoctorName);
   }
 
   SelectedClinic(ClinicName){

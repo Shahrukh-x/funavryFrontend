@@ -1,4 +1,5 @@
 
+
 <div>
 
 <div class="column2" style="background-color:#ccc;">
@@ -63,7 +64,7 @@
                         &nbsp;
                       </td>
                     </tr>
-                    <tr *ngFor="let ResourceDoctor of SelectedDoctors" >
+                    <tr *ngFor="let ResourceDoctor of SelectedSpecialities" >
                       <td *ngIf="HideResources == true" (click)="DeleteYResource($event)" style="cursor: pointer">
                         <div style=" overflow: hidden; white-space: nowrap; background-color: white">{{ResourceDoctor}}</div>
                       </td>
@@ -83,7 +84,7 @@
                       <tr>
                         <th  *ngFor="let item of weeks">{{DaysInMonth[TotalDays]}} {{incrementDay()}}</th>
                       </tr>
-                      <tr *ngFor="let DocName of SelectedDoctors" >
+                      <tr *ngFor="let DocName of SelectedSpecialities" >
                         <th  style="overflow: hidden; max-width: 10px" *ngFor="let item of weeks; let k = index"  [ngSwitch]="returnItem(DocName,(k+1) + (7 * DivNumber) ,ClinicName)"  >
                           <div id="EmptyCell" droppable  (onDrop)="onItemDrop($event,DocName,(k+1) + (7 * DivNumber) ,ClinicName)"  *ngSwitchCase="'.'" style="overflow: hidden;white-space: nowrap; background-color: white" [contextMenu]="NoEventContext"  (click)="EmptyBoxClicked(DocName,ClinicName,(k+1) + (7 * DivNumber))">	&nbsp;  </div>
                           <context-menu #EventContext>
@@ -97,10 +98,10 @@
                               Delete
                             </ng-template>
                           </context-menu>
-                          <div  id ="FullCell" class="wrapper" draggable dragData="{{returnItem(DocName,(k+1) + (7 * DivNumber) ,ClinicName).Timing}}" droppable (onDrop)="onItemDrop($event)" *ngSwitchDefault style="overflow: hidden; white-space:nowrap; background-color: yellow" [contextMenu]="EventContext"  (click)="EventBoxClicked($event,DocName,ClinicName,(k+1) + (7 * DivNumber) )">
+                          <div  id ="FullCell" class="wrapper" draggable dragData="{{returnItem(DocName,(k+1) + (7 * DivNumber) ,ClinicName).DoctorName}}" droppable (onDrop)="onItemDrop($event)" *ngSwitchDefault style="overflow: hidden; white-space:nowrap; background-color: yellow" [contextMenu]="EventContext"  (click)="EventBoxClicked($event,DocName,ClinicName,(k+1) + (7 * DivNumber) )">
                             <div class="row" style=" overflow: hidden;">
                               <div  *ngFor="let item of TestArr" style=" overflow: hidden">
-                                {{(returnItem(DocName,(k+1) + (7 * DivNumber) ,ClinicName).Timing)}}
+                                {{(returnItem(DocName,(k+1) + (7 * DivNumber) ,ClinicName).DoctorName)}}
                               </div>
                             </div>
                           </div>

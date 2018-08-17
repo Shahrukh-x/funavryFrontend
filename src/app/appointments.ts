@@ -6,6 +6,7 @@ export class Appointments {
   Date;
   Timing;
 
+
   constructor(){
 
   }
