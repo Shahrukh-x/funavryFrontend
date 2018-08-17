@@ -23,6 +23,7 @@ import { ConflictFormComponent } from './conflict-form/conflict-form.component';
 import { ResizableDivDirective } from './doctor-day/resizable-div.directive';
 import { EventContainerDirective } from './doctor-day/event-container.directive';
 import { Screen2Component } from './screen2/screen2.component';
+import { NgDatepickerModule } from 'ng2-datepicker';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +41,7 @@ import { Screen2Component } from './screen2/screen2.component';
     Screen2Component,
   ],
   imports: [
+    NgDatepickerModule,
     HttpClientModule,
     CheckboxModule,
     MyDatePickerModule,

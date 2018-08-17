@@ -1,6 +1,8 @@
 import { Component, OnInit , Input} from '@angular/core';
 import {IMyDateModel, IMyDpOptions} from 'mydatepicker';
 import {AjaxRequestServiceService} from '../ajax-request-service.service';
+import { DatepickerOptions } from 'ng2-datepicker';
+import * as frLocale from 'date-fns/locale/fr';
 import {MonthSchedulerComponent} from '../month-scheduler/month-scheduler.component';
 
 @Component({
@@ -21,11 +23,13 @@ export class Screen1Component implements OnInit {
   Con1flictView = true;
   DoctorViewClicked;
   SelectItem = false;
-
+  isOpen = true;
   public myDatePickerOptions: IMyDpOptions = {
     // other options...
     dateFormat: 'dd.mm.yyyy',
     inline: true,
+    height: '100%',
+    selectorWidth : '100%',
   };
 
   public model: any = { date: { year: 2018, month: 10, day: 9 } };
@@ -46,19 +50,19 @@ export class Screen1Component implements OnInit {
     // this.ShareDateScheduler.Year = event.date.year;
   }
 
-  SelectedDoctor(DoctorName){
+  SelectedDoctor(DoctorName) {
     this.SelectedSpecialitiesList.push(DoctorName);
   }
 
-  SelectedClinic(ClinicName){
+  SelectedClinic(ClinicName) {
     this.SelectedClinicList.push(ClinicName);
 
   }
 
-  ClinicClicked(){
-    if (this.DoctorViewClicked === true){
+  ClinicClicked() {
+    if (this.DoctorViewClicked === true) {
       this.DoctorViewClicked = false;
-    } else{
+    } else {
       this.DoctorViewClicked = true;
     }
     return this.DoctorViewClicked;

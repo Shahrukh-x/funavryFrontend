@@ -35,51 +35,58 @@
 </div>
 
 <div style="padding-top: 20px; background-color: white">
-      <div style="width:25%; float:left; height:auto; background-color: darkgrey; border-radius: 4px; margin-left: 0; padding: 0">
+      <div style="width:25%; float:left; height:auto; border-radius: 4px; margin-left: 0; padding: 0">
 
-        <div style="width:100%; height:fit-content; padding-bottom: 30px;   background-color: white;">
-          <div class="w3-ul w3-card-4" style="width: fit-content; margin: 0 auto; padding-top: 10px" >
-            <my-date-picker  name="mydate" [options]="myDatePickerOptions"
-                            [(ngModel)]="model" required  (dateChanged)="onDateChanged($event)"></my-date-picker>
-          </div>
+        <div class="date-picker-container" style="padding: 10%;">
+          <div style="box-shadow: 2px 2px 10px 0px gray; border-radius: 10px">
+            <my-date-picker  name="mydate" [options]="myDatePickerOptions" [(ngModel)]="model" required  (dateChanged)="onDateChanged($event)"></my-date-picker>
+          </div>  
         </div>
 
-        <div style="background-color: white" class="Imagesrow">
-          <div class="Imagescolumn" (click)="ClinicClicked()">
-            <img src="../../assets/avatar.png"  style="width:55px" class="w3-circle">
-          </div >
-          <div class="Imagescolumn " (click)="ClinicClicked()">
-            <img  src="../../assets/avatar.png"  style="width:55px" class="w3-circle">
-          </div>
+        <div style="background-color: white; padding-left: 5%; padding-right: 5%; padding-bottom: 5%">          
+          <a (click)="ClinicClicked()" class="btn btn-success" style="color: white; width:50%; float: left"><i class="fab fa-medrt w3-circle"></i>Clinics</a>
+          <a (click)="ClinicClicked()" class="btn btn-primary" style="color: white; width:50%; float: left"><i class="fas fa-user-md w3-circle"></i>Doctors</a>
         </div>
 
-        <div style="width:100%; height:fit-content; background-color: white; padding-top: 40px">
-          <div class="w3-container" [ngSwitch]="DoctorViewClicked">
-
-
-            <ul id='DoctorsList'  *ngSwitchCase="true" class="w3-ul w3-card-4" style="background-color: #f1f1f1" >
-              <li><h2>Doctors</h2></li>
-              <li class="w3-bar" *ngFor="let Doctors of AllSpecialitiesList" >
-                <!--<span onclick="this.parentElement.style.display='none'" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>-->
-                <span  (click)="SelectedDoctor(Doctors)" class="w3-bar-item w3-button w3-xlarge w3-right">C</span>
-                <img src="../../assets/avatar.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
-                <div class="w3-bar-item">
-                  <span class="w3-large">{{Doctors}}</span><br>
-                  <span>PT</span>
-                </div>
+        <div style="width:100%; height:fit-content; background-color: white; ">
+          <div [ngSwitch]="DoctorViewClicked" style="padding-left: 5%; padding-right: 5%;">
+            <ul id='DoctorsList'  *ngSwitchCase="true" class="w3-ul w3-card-4" style="background-color: #f1f1f1;box-shadow: 2px 2px 10px 0px gray" >
+              <li style="color: white; background-color: royalblue; text-align: center; padding-top: 10%"><h2>Doctors</h2></li>
+              <li style="padding-left: 0; padding-right: 0" class="w3-bar" *ngFor="let Doctors of AllSpecialitiesList" >
+                <table >
+                  <tr>
+                    <td nowrap style="width: 1%; white-space: nowrap;">
+                      <img src="../../assets/avatar.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+                    </td>
+                    <td style="text-align: left">
+                      <span style="font-weight: 600" class="w3-large">{{Doctors}}</span>
+                      <p style="font-size: 80%">PT</p>
+                    </td>
+                    <td>
+                      <span (click)="SelectedDoctor(Doctors)" class="w3-bar-item w3-button w3-large w3-right"><i class="far fa-check-square"></i></span>
+                    </td>
+                  </tr>
+                </table>
               </li>
             </ul>
 
             <ul id='ClinicList'  *ngSwitchDefault class="w3-ul w3-card-4" style="background-color: #f1f1f1" >
-              <li><h2>Clinics</h2></li>
-              <li class="w3-bar" *ngFor="let Clinics of AllClinicList" >
-                <!--<span onclick="this.parentElement.style.display='none'" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>-->
-                <span  (click)="SelectedClinic(Clinics)" class="w3-bar-item w3-button w3-xlarge w3-right">C</span>
-                <img src="../../assets/avatar.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
-                <div class="w3-bar-item">
-                  <span class="w3-large">{{Clinics}}</span><br>
-                  <span>PT</span>
-                </div>
+              <li style="color: white; background-color: forestgreen; text-align: center; padding-top: 10%"><h2>Clinics</h2></li>
+              <li style="padding-left: 0; padding-right: 0" class="w3-bar" *ngFor="let Clinics of AllClinicList" >
+                <table >
+                  <tr>
+                    <td nowrap style="width: 1%; white-space: nowrap;">
+                      <img src="../../assets/avatar.png" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">
+                    </td>
+                    <td style="text-align: left">
+                      <span style="font-weight: 600" class="w3-large">{{Clinics}}</span>
+                      <p style="font-size: 80%">PT</p>
+                    </td>
+                    <td>
+                      <span (click)="SelectedClinic(Clinics)" class="w3-bar-item w3-button w3-large w3-right"><i class="far fa-check-square"></i></span>
+                    </td>
+                  </tr>
+                </table>
               </li>
             </ul>
 
