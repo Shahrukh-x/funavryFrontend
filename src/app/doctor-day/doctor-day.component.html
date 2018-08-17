@@ -82,20 +82,20 @@
                               </div>
                               
                             </td>
-                            <td *ngFor="let Doc of Doctors">  
+                            <td style="white-space: nowrap; max-width: 200px; overflow: hidden; text-overflow: ellipsis;" *ngFor="let Doc of Doctors">  
                               <div>
                                 <table>
                                   <tbody *ngFor="let item of FullHours; let i = index" >
                                   <tr [ngSwitch]="returnItem(Doc)" [ngStyle]="{'background-color':returnItem(Doc) === ',' ? 'white' : 'yellow' }">
-                                    <td class="data-cell" [style.height.px]="unitHeight" >
-                                      <div id="{{'event' + i}}" *ngIf="hasEvent(i)" class="event-container">
+                                    <td style="width: 100%; overflow: visible; float: left;" class="data-cell" [style.height.px]="unitHeight">
+                                      <div style="position: sticky; z-index:1" id="{{'event' + i}}" *ngIf="hasEvent(i)" class="event-container">
                                         <div
                                         draggable
                                         mwlResizable
                                         appResizableDiv
                                         [enableGhostResize]="true"
                                         [resizeEdges]="{bottom: true}"
-                                        style="background-color: transparent;">
+                                        style="color: transparent;">
           
                                           <div class="event" [style.height.px]="unitHeight">
                                               <div style="width:100%; float:left" class="content">04:30PM -- 05:30PM</div>
