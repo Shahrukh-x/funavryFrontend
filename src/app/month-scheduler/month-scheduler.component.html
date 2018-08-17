@@ -1,5 +1,8 @@
 
-
+<!--{{TotalDaysAndOffset}}-->
+<!--{{MDays}}-->
+<!--{{getMonthOffset()}}-->
+<!--{{TotalDaysPortion}}-->
 
 <div>
 
@@ -32,13 +35,17 @@
                     </tr>
                   </table>
                 </td>
-                <td *ngFor="let ResourceClinic of SelectedClinics">
+                <td *ngFor="let ResourceClinic of SelectedClinics.length === 0? ['No Clinic Selected']: SelectedClinics">
                   <div >
                     <table>
                       <thead>
                       <tr>
                         <td colspan="7"  style="cursor: pointer" (click)="DeleteXResource($event)" >
-                          <div style=" overflow: hidden; white-space: nowrap; background-color: white">{{ResourceClinic}}</div>
+                          <div style=" overflow: hidden; white-space: nowrap; background-color: white">
+                            <div >
+                              {{ResourceClinic}}
+                            </div>
+                          </div>
                         </td>
                       </tr>
                       </thead>
@@ -72,7 +79,7 @@
                     </tbody>
                   </table>
                 </td>
-                <td *ngFor="let ClinicName of SelectedClinics"> {{RefreshDaysCounter()}}
+                <td *ngFor="let ClinicName of SelectedClinics.length === 0? ['No Clinic Selected']: SelectedClinics"> {{RefreshDaysCounter()}}
                   <div>
                     <table>
                       <thead>
@@ -82,7 +89,7 @@
                       </thead>
                       <tbody *ngFor="let FirstPortion of AuxillaryFunction(TotalDaysPortion); let DivNumber = index" >
                           <tr>
-                            <th  *ngFor="let DaysInARow of weeks" [ngSwitch]="ReturnOffsetForStartingDay(EmptySpaces)"> {{IncrementEmptySpaces()}}
+                            <th *ngFor="let DaysInARow of weeks" [ngSwitch]="ReturnOffsetForStartingDay(EmptySpaces)"> {{IncrementEmptySpaces()}}
                               <div *ngSwitchCase="false">
                                 &nbsp;
                               </div>
@@ -93,7 +100,7 @@
                           </tr>
                           <tr *ngFor="let DocName of SelectedSpecialities" >
 
-                            <th  style="overflow: hidden; max-width: 10px" *ngFor="let item of weeks; let k = index"  [ngSwitch]="returnItem(DocName,(k+1) + (7 * DivNumber) ,ClinicName)"  >
+                            <th style=" overflow: hidden; max-width: 10px" *ngFor="let item of weeks; let k = index"  [ngSwitch]="returnItem(DocName,(k+1) + (7 * DivNumber) ,ClinicName)"  >
                               <div id="EmptyCell" droppable  (onDrop)="onItemDrop($event,DocName,(k+1) + (7 * DivNumber) ,ClinicName)"  *ngSwitchCase="false" style="overflow: hidden;white-space: nowrap; background-color: white" [contextMenu]="NoEventContext"  (click)="EmptyBoxClicked(DocName,ClinicName,(k+1) + (7 * DivNumber))">	&nbsp;  </div>
                               <context-menu #EventContext>
                                 <ng-template contextMenuItem (execute)="CopyElement(returnItem(DocName,(k+1) + (7 * DivNumber) ,ClinicName).SpecialityAssignmentId)" >

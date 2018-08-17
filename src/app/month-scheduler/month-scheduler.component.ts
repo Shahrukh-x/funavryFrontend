@@ -57,15 +57,15 @@ export class MonthSchedulerComponent implements OnInit {
     this.MDays = moment(this.Year+"-"+(this.Month+1), "YYYY-MM").daysInMonth();
     this.weeks =  moment.weekdaysShort();
     this.TotalDaysAndOffset = this.MDays + this.getMonthOffset();
-    if ( ( ( (this.TotalDaysAndOffset*1.0) / (7*1.0) )  )=== 4 ){
-      this.TotalDaysPortion = 4;
-    } else {
-      this.TotalDaysPortion = 5;
-    }
+    this.TotalDaysPortion = (this.TotalDaysAndOffset) / +7;
+    this.TotalDaysPortion = parseInt(String(this.TotalDaysPortion), 10);
+    this.TotalDaysPortion += +(this.TotalDaysAndOffset%7! > 0);
+    console.log(this.TotalDaysPortion);
     this.PopulateMonth();
   }
 
   AuxillaryFunction(ArraySize){
+    console.log(ArraySize);
     return new Array(ArraySize);
   }
   RetrieveMonthlyAssignments(){
@@ -103,7 +103,7 @@ export class MonthSchedulerComponent implements OnInit {
   }
 
 
-  ChangeMonth() {
+  @Input() ChangeMonth() {
 
     this.RetrieveMonthlyAssignments();
     this.TotalDays = 0;
@@ -119,11 +119,9 @@ export class MonthSchedulerComponent implements OnInit {
     this.weeks = moment.weekdays();
     this.MDays = moment(this.Year+"-"+(this.Month+1), "YYYY-MM").daysInMonth();
     this.TotalDaysAndOffset = this.MDays + this.getMonthOffset();
-    if ( ( ( (this.TotalDaysAndOffset*1.0) / (7*1.0) )  ) === 4 ){
-      this.TotalDaysPortion = this.TotalDaysAndOffset / 7;
-    } else {
-      this.TotalDaysPortion = 5;
-    }
+    this.TotalDaysPortion = (this.TotalDaysAndOffset*1) / 7*1;
+    this.TotalDaysPortion += +(this.TotalDaysAndOffset%7! > 0);
+    this.TotalDaysPortion = parseInt(String(this.TotalDaysPortion), 10);
     this.PopulateMonth();
   }
 
@@ -244,6 +242,16 @@ export class MonthSchedulerComponent implements OnInit {
 
   IncrementEmptySpaces(){
     this.EmptySpaces = this.EmptySpaces + 1;
+  }
+
+
+  ReturnClinicArrayLenght(){
+    if (this.SelectedClinics.length === 0){
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 
 
