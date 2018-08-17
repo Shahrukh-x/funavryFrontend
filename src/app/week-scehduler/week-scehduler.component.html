@@ -1,141 +1,130 @@
-
-<!DOCTYPE html>
-
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-
-<div class="column2" style="background-color:#ccc;">
-
-
-  <div class="dropdown">
-    <button class="dropbtn">{{DoctorBox}}</button>
-    <div class="dropdown-content">
-      <a (click)=" UpdateDoctor(item)" *ngFor="let item of AllDoctors">{{item}}</a>
-    </div>
-  </div>
-
-  <div class="dropdown">
-    <button class="dropbtn">{{ClinicBox}}</button>
-    <div class="dropdown-content">
-      <a (click)="UpdateClinic(item)" *ngFor="let item of AllClincis">{{item}}</a>
-    </div>
-  </div>
-
-
-</div>
-
-<!-- Outer div which contains the header div and the month calender div   -->
 <div>
-  <div class="header">  <!-- Header Div  -->
-    <a class="logo">{{Year}}   {{MonthName}} {{MDays - 7}} --</a>
-
-    <a class="logo">{{Year}}   {{MonthName}} {{MDays}}</a>
-
-  </div>
-
-  <br>
-
-  <div id="fc-view-container">  <!-- Month Calendar Div  -->
-    <table>
-      <tr>
-        <td>
-          <div id="month-view" >
-            <table id="month-view-table">
-              <thead >
-              <tr>
-                <td>
-                  <table>
+  <table style="width: 100%">
+    <tr>
+      <td>
+        <table style="width:100%">
+          <tr>
+            <td style="width:100%; background-color: gainsboro; border-radius: 4px">
+              <a style="border: 4px solid white; border-radius: 100%; padding-right: 0.5%; padding-left: 0.5%"><i class="fas fa-chevron-left" style="color: white"></i></a>
+              <a style="width:100%; font-weight: 600; font-size: 120%; color: ghostwhite; padding-right: 0.5%; padding-left: 0.5%">{{Year}} {{MonthName}} {{MDays - 7}} --  {{Year}} {{MonthName}} {{MDays}}</a>
+              <a style="border: 4px solid white; border-radius: 100%; padding-right: 0.5%; padding-left: 0.5%"><i class="fas fa-chevron-right" style="color: white"></i></a>
+            </td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-success dropdown-toggle">
+                  <i class="fas fa-user-md"></i>
+                  Clinics
+                </button>
+                <div class="dropdown-content">
+                  <a (click)="UpdateClinic(item)" *ngFor="let item of AllClincis">{{item}}</a>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-success dropdown-toggle">
+                  <i class="fas fa-user-md"></i>
+                  Doctors
+                </button>
+                <div class="dropdown-content">
+                  <a (click)=" UpdateDoctor(item)" *ngFor="let item of AllDoctors">{{item}}</a>
+                </div>
+              </div>
+            </td>
+            <td>
+              <button class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i>
+                Remove
+              </button>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 0.3%">
+        <div id="fc-view-container" style="height: 500px; overflow: scroll">  <!-- Month Calendar Div  -->
+          <table>
+            <tr>
+              <td>
+                <div id="month-view" >
+                  <table id="month-view-table">
+                    <thead >
                     <tr>
                       <td>
-                        --
+                        <table>
+                          <tr>
+                            <td class="hz-resource-r3">
+                              --
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                      <td *ngFor="let ResourceClinic of clinics">
+                        <div>
+                          <table>
+                            <thead>
+                            <tr>
+                              <td class="hz-resource-r3" colspan="7" (click)="DeleteXResource($event)" style="cursor: pointer" >
+                                {{ResourceClinic}}
+                              </td>
+                            </tr>
+                            </thead>
+                          </table>
+                        </div>
                       </td>
                     </tr>
-                  </table>
-                </td>
-                <td *ngFor="let ResourceClinic of clinics">
-                  <div>
-                    <table>
-                      <thead>
-                      <tr>
-                        <td colspan="7" (click)="DeleteXResource($event)" style="cursor: pointer" >
-                          {{ResourceClinic}}
-                        </td>
-                      </tr>
-                      </thead>
-                    </table>
-                  </div>
-                </td>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td id="left-resources">
-                  <table>
-                    <thead>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let TwoItems of [1,2]">
-                      <td>
-                        --
+                    <tr>
+                      <td id="left-resources">
+                        <table>
+                          <thead>
+                          </thead>
+                          <tbody>
+                          <tr *ngFor="let TwoItems of ['hz-resource-r2','hz-resource-r1']">
+                            <td [class]="TwoItems">
+                              --
+                            </td>
+                          </tr>
+                          <tr *ngFor="let ResourceDoctor of Doctors" >
+                            <td (click)="DeleteYResource($event)" style="cursor: pointer" class="vr-resource-r1">
+                              <div style=" overflow: hidden; white-space: nowrap; background-color: transparent">{{ResourceDoctor}}</div>
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table>
                       </td>
-                    </tr>
-                    <tr *ngFor="let ResourceDoctor of Doctors" >
-                      <td (click)="DeleteYResource($event)" style="cursor: pointer">
-                        <div style=" overflow: hidden; white-space: nowrap; background-color: white">{{ResourceDoctor}}</div>
+                      <td *ngFor="let ClinicName of clinics"> {{RefreshDaysCounter()}}
+                        <div>
+                          <table>
+                            <thead>
+                            <tr>
+                              <th class="hz-resource-r2" *ngFor="let item of weeks">{{item}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                              <th class="hz-resource-r1" *ngFor="let item of [1,2,3,4,5,6,7]"> {{item}} </th>
+                            </tr>
+                            <tr *ngFor="let DocName of Doctors" >
+                              <th class="data-cell" *ngFor="let item of weeks; let k = index"  [ngSwitch]="returnItem(DocName,k,ClinicName)" (click)="EventBoxClicked($event,DocName,ClinicName,k)">
+                                <div droppable (onDrop)="onItemDrop($event)" *ngSwitchCase="'.'" style=" overflow: hidden; white-space: nowrap; background-color: white"> {{returnItem(DocName,k,ClinicName)}}</div>
+                                <div  draggable dragData="{{returnItem(DocName,k,ClinicName)}}" droppable (onDrop)="onItemDrop($event)" *ngSwitchDefault style="overflow: hidden; white-space:nowrap; background-color: yellow" [contextMenu] (mousedown)="OnContextMenu(returnItem(DocName,k,ClinicName))"> {{returnItem(DocName,k,ClinicName)}}</div>
+                              </th>
+                            </tr>
+                            </tbody>
+                          </table>
+      
+                        </div>
                       </td>
                     </tr>
                     </tbody>
                   </table>
-                </td>
-                <td *ngFor="let ClinicName of clinics"> {{RefreshDaysCounter()}}
-                  <div>
-                    <table>
-                      <thead>
-                      <tr>
-                        <th *ngFor="let item of weeks">{{item}}</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr>
-                        <th  *ngFor="let item of weeks"> 1 </th>
-                      </tr>
-                      <tr *ngFor="let DocName of Doctors" >
-                        <th *ngFor="let item of weeks; let k = index"  [ngSwitch]="returnItem(DocName,k,ClinicName)" (click)="EventBoxClicked($event,DocName,ClinicName,k)">
-                          <div droppable (onDrop)="onItemDrop($event)" *ngSwitchCase="'.'" style=" overflow: hidden; white-space: nowrap; background-color: white"> {{returnItem(DocName,k,ClinicName)}}</div>
-                          <div  draggable dragData="{{returnItem(DocName,k,ClinicName)}}" droppable (onDrop)="onItemDrop($event)" *ngSwitchDefault style="overflow: hidden; white-space:nowrap; background-color: yellow" [contextMenu] (mousedown)="OnContextMenu(returnItem(DocName,k,ClinicName))"> {{returnItem(DocName,k,ClinicName)}}</div>
-                        </th>
-                      </tr>
-                      </tbody>
-                    </table>
-
-                  </div>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </td>
-      </tr>
-    </table>
-
-  </div>
-
-</div>
-
-
-</html>
-
-
-<context-menu id="basicMenu">
-  <ng-template contextMenuItem (execute)="CopyElement()">
-    copy
-  </ng-template>
-  <ng-template contextMenuItem (execute)="PasteElement()" >
-    paste
-  </ng-template>
-  <ng-template contextMenuItem (execute)="DeleteElement()">
-    Delete
-  </ng-template>
-</context-menu>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </td>
+    </tr>

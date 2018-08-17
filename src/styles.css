@@ -35,7 +35,7 @@ td, th {
     background-color: #f1f1f1;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    z-index: 1000;
 }
 
 .dropdown-content a {
@@ -49,8 +49,32 @@ td, th {
 
 .dropdown:hover .dropdown-content {display: block;}
 
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
 
+.hz-resource-r1{
+    border: 1px solid gainsboro;
+    background-color: floralwhite
+}
+
+.hz-resource-r2{
+    border: 1px solid gray;
+    background-color: gainsboro
+}
+
+.hz-resource-r3{
+    background-color: slategray;
+    color: white;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%
+}
+
+.vr-resource-r1{
+    border: 1px solid gainsboro;
+    background-color: floralwhite
+}
+
+.data-cell{
+    border: 1px solid gainsboro;
+}
 
 
 /* Event Related CSS Limit Start*/

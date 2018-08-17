@@ -45,7 +45,7 @@
                                   <table>
                                     <!-- this is the row to show doctor names -->
                                     <tr>
-                                      <td style="width:60px;" style="border: 1px solid gainsboro">
+                                      <td class="hz-resource-r2" style="width:60px;">
                                         ------
                                       </td>
                                     </tr>
@@ -56,8 +56,8 @@
                                     <table>
                                       <thead>
                                       <tr>
-                                        <td colspan="7" (click)="DeleteXResource($event)" style="cursor: pointer;" >
-                                          <div style="overflow: hidden; white-space: nowrap; background-color: white">{{ResourceDoc}}</div>
+                                        <td class="hz-resource-r3" colspan="7" (click)="DeleteXResource($event)" style="cursor: pointer;" >
+                                          <div style="overflow: hidden; white-space: nowrap; background-color: transparent">{{ResourceDoc}}</div>
                                         </td>
                                       </tr>
                                       </thead>
@@ -69,12 +69,12 @@
                                 <td>
                                   <table>
                                     <tr>
-                                      <td style="width:60px;" style="border: 1px solid gainsboro">
+                                      <td class="hz-resource-r2" style="width:60px;" style="border: 1px solid gainsboro">
                                         ------
                                       </td>
                                     </tr>
                                     <tr>
-                                      <td style="width:60px;" style="border: 1px solid gainsboro">
+                                      <td class="hz-resource-r1" style="width:60px;" style="border: 1px solid gainsboro">
                                         ------
                                       </td>
                                     </tr>
@@ -85,13 +85,13 @@
                                     <table>
                                       <thead >
                                       <tr>
-                                        <td *ngFor="let item of weeks" style="width:100px; white-space: nowrap">
-                                          <div style="overflow: hidden; white-space: nowrap; background-color: white">{{item}}</div>
+                                        <td class="hz-resource-r2" *ngFor="let item of weeks" style="width:100px; white-space: nowrap">
+                                          <div style="overflow: hidden; white-space: nowrap; background-color: transparent">{{item}}</div>
                                         </td>
                                         </tr>
                                         <tr>
-                                          <td *ngFor="let item of weeks; let i = index" style="width:100px; white-space: nowrap">
-                                            <div style="overflow: hidden; white-space: nowrap; background-color: white">{{i}}</div>
+                                          <td class="hz-resource-r1" *ngFor="let item of weeks; let i = index" style="width:100px; white-space: nowrap">
+                                            <div style="overflow: hidden; white-space: nowrap; background-color: transparent">{{i}}</div>
                                           </td>
                                         </tr>
                                       </thead>
@@ -107,9 +107,9 @@
                                     <table>
                                       <tbody *ngFor="let Hours of FullHours; let i= index">
                                       <tr>
-                                        <td [style.height.px]="unitHeight" style="border:1px solid gainsboro; cursor: pointer">
-                                          <div *ngIf="true" style=" overflow: hidden; white-space: nowrap; background-color: white">{{Hours}}</div>
-                                          <div *ngIf="false" style=" overflow: hidden; white-space: nowrap; background-color: white">&nbsp;</div>
+                                        <td class="vr-resource-r1" [style.height.px]="unitHeight" style="border:1px solid gainsboro; cursor: pointer">
+                                          <div *ngIf="true" style=" overflow: hidden; white-space: nowrap; background-color: transparent">{{Hours}}</div>
+                                          <div *ngIf="false" style=" overflow: hidden; white-space: nowrap; background-color: transparent">&nbsp;</div>
                                         </td>
                                       </tr>
                                       </tbody>
@@ -127,7 +127,7 @@
                                               <table>
                                                 <tbody *ngFor="let item of FullHours; let i = index" >
                                                   <tr [ngSwitch]="returnItem(Doc)" [ngStyle]="{'background-color':returnItem(Doc) === ',' ? 'white' : 'yellow' }">
-                                                    <td [style.height.px]="unitHeight" style="border: 1px solid gainsboro" >
+                                                    <td class="data-cell" [style.height.px]="unitHeight" style="border: 1px solid gainsboro" >
                                                       <div id="{{'event' + i}}" *ngIf="hasEvent(i)" class="event-container">
                                                         <div
                                                         draggable
@@ -135,7 +135,7 @@
                                                         appResizableDiv
                                                         [enableGhostResize]="true"
                                                         [resizeEdges]="{bottom: true}"
-                                                        style="background-color: white;">
+                                                        style="background-color: transparent;">
                             
                                                           <div class="event" [style.height.px]="unitHeight">
                                                               <div style="width:100%; float:left" class="content">04:30PM -- 05:30PM</div>
