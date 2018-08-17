@@ -1,116 +1,170 @@
-
-<!DOCTYPE html>
-
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-
-<div class="column2" style="background-color:#ccc;">
-
-
-  <div class="dropdown">
-    <button class="dropbtn">{{DoctorBox}}</button>
-    <div class="dropdown-content">
-      <a (click)=" UpdateDoctor(item)" *ngFor="let item of AllDoctors">{{item}}</a>
-    </div>
-  </div>
-
-
-</div>
-
-<!-- Outer div which contains the header div and the month calender div   -->
 <div>
-  <div class="header">  <!-- Header Div  -->
-    <a class="logo">{{Year}}   {{MonthName}} 24  --</a>
-    <a class="logo">{{Year}}   {{MonthName}} 31</a>
-  </div>
-
-  <br>
-
-  <div id="fc-view-container">  <!-- Month Calendar Div  -->
-    <table>
-      <tr>
-        <td>
-          <div id="month-view" >
-            <table id="month-view-table">
-              <thead >
+    <table style="width: 100%">
+        <tr>
+          <td>
+            <table style="width:100%">
               <tr>
+                <td style="width:100%; background-color: gainsboro; border-radius: 4px">
+                  <a style="border: 4px solid white; border-radius: 100%; padding-right: 0.5%; padding-left: 0.5%"><i class="fas fa-chevron-left" style="color: white"></i></a>
+                  <a style="width:100%; font-weight: 600; font-size: 120%; color: ghostwhite; padding-right: 0.5%; padding-left: 0.5%">{{Year}}   {{MonthName}} 24  -- {{Year}}   {{MonthName}} 31</a>
+                  <a style="border: 4px solid white; border-radius: 100%; padding-right: 0.5%; padding-left: 0.5%"><i class="fas fa-chevron-right" style="color: white"></i></a>
+                </td>
                 <td>
+                  <div class="dropdown">
+                    <button class="btn btn-success dropdown-toggle">
+                      <i class="fas fa-user-md"></i>
+                      Doctors
+                    </button>
+                    <div class="dropdown-content">
+                      <a (click)=" UpdateDoctor(item)" *ngFor="let item of AllDoctors">{{item}}</a>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <button class="btn btn-danger">
+                    <i class="fas fa-trash-alt"></i>
+                    Remove
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+            <td style="padding: 0.3%">
+                <div id="fc-view-container" style="height: 600px; overflow-y: scroll">  <!-- Month Calendar Div  -->
+        
                   <table>
                     <tr>
                       <td>
-                        --
+                        <div id="Week-view">
+                          <table id="Week-view-table">
+                            <thead >
+                              <tr>
+                                <td>
+                                  <table>
+                                    <!-- this is the row to show doctor names -->
+                                    <tr>
+                                      <td style="width:60px;" style="border: 1px solid gainsboro">
+                                        ------
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </td>
+                                <td *ngFor="let ResourceDoc of Doctors" style="border: 1px solid gainsboro">
+                                  <div>
+                                    <table>
+                                      <thead>
+                                      <tr>
+                                        <td colspan="7" (click)="DeleteXResource($event)" style="cursor: pointer;" >
+                                          <div style="overflow: hidden; white-space: nowrap; background-color: white">{{ResourceDoc}}</div>
+                                        </td>
+                                      </tr>
+                                      </thead>
+                                    </table>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <table>
+                                    <tr>
+                                      <td style="width:60px;" style="border: 1px solid gainsboro">
+                                        ------
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td style="width:60px;" style="border: 1px solid gainsboro">
+                                        ------
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </td>
+                                <td *ngFor="let ResourceDoc of Doctors" style="border: 1px solid gainsboro">
+                                  <div>
+                                    <table>
+                                      <thead >
+                                      <tr>
+                                        <td *ngFor="let item of weeks" style="width:100px; white-space: nowrap">
+                                          <div style="overflow: hidden; white-space: nowrap; background-color: white">{{item}}</div>
+                                        </td>
+                                        </tr>
+                                        <tr>
+                                          <td *ngFor="let item of weeks; let i = index" style="width:100px; white-space: nowrap">
+                                            <div style="overflow: hidden; white-space: nowrap; background-color: white">{{i}}</div>
+                                          </td>
+                                        </tr>
+                                      </thead>
+                                    </table>
+                                  </div>
+                                </td>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr >
+                                <td id="left-resources" style="width:10%">
+                                  <div>
+                                    <table>
+                                      <tbody *ngFor="let Hours of FullHours; let i= index">
+                                      <tr>
+                                        <td [style.height.px]="unitHeight" style="border:1px solid gainsboro; cursor: pointer">
+                                          <div *ngIf="true" style=" overflow: hidden; white-space: nowrap; background-color: white">{{Hours}}</div>
+                                          <div *ngIf="false" style=" overflow: hidden; white-space: nowrap; background-color: white">&nbsp;</div>
+                                        </td>
+                                      </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                  
+                                </td>
+                                <td *ngFor="let Doc of Doctors">
+                                  <div>
+                                    <table>
+                                      <tr>
+                                        <ng-container >
+                                          <td *ngFor="let item of weeks; let i = index" style="width:100px; white-space: nowrap">
+                                            <div>
+                                              <table>
+                                                <tbody *ngFor="let item of FullHours; let i = index" >
+                                                  <tr [ngSwitch]="returnItem(Doc)" [ngStyle]="{'background-color':returnItem(Doc) === ',' ? 'white' : 'yellow' }">
+                                                    <td [style.height.px]="unitHeight" style="border: 1px solid gainsboro" >
+                                                      <div id="{{'event' + i}}" *ngIf="hasEvent(i)" class="event-container">
+                                                        <div
+                                                        draggable
+                                                        mwlResizable
+                                                        appResizableDiv
+                                                        [enableGhostResize]="true"
+                                                        [resizeEdges]="{bottom: true}"
+                                                        style="background-color: white;">
+                            
+                                                          <div class="event" [style.height.px]="unitHeight">
+                                                              <div style="width:100%; float:left" class="content">04:30PM -- 05:30PM</div>
+                                                              <div style="width:100%; float:left" class="content">event {{i}}</div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                      <div appEventContainer *ngIf="!hasEvent(i)" (click)="createEvent(i)" class="event-container" droppable>&nbsp;</div>
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </td>
+                                        </ng-container>
+                                      </tr>
+                                    </table>
+                                </div>
+                              </td>
+                            </tr>
+                            </tbody>
+                          </table>
+                        </div>
                       </td>
                     </tr>
                   </table>
-                </td>
-                <td *ngFor="let ResourceDoc of Doctors">
-                  <div>
-                    <table>
-                      <thead>
-                      <tr>
-                        <td colspan="7" (click)="DeleteXResource($event)" style="cursor: pointer" >
-                          {{ResourceDoc}}
-                        </td>
-                      </tr>
-                      </thead>
-                    </table>
-                  </div>
-                </td>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td id="left-resources">
-                  <table>
-                    <thead>
-                    </thead>
-                    <tbody>
-                    <tr *ngFor="let TwoItems of [1,2]">
-                      <td>
-                        --
-                      </td>
-                    </tr>
-                    <tr *ngFor="let Hours of FullHours" >
-                      <td style="cursor: pointer">
-                        {{Hours}}
-                      </td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </td>
-                <td *ngFor="let Doct of Doctors">
-                  <div>
-                    <table>
-                      <thead>
-                      <tr>
-                        <th *ngFor="let item of weeks">{{item}}</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr>
-                        <th  *ngFor="let item of weeks"> 1 </th>
-                      </tr>
-                      <tr *ngFor="let DocName of FullHours" >
-                        <td *ngFor="let item of weeks; let k = index"  [ngStyle]="{'background-color':returnItem(Doct, k )=== '.' ? 'white' : 'yellow' }" >  {{returnItem(Doct, k )}} </td>
-                      </tr>
-                      </tbody>
-                    </table>
-
-                  </div>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </td>
-      </tr>
-    </table>
-
-  </div>
-
-</div>
-
-
-</html>
+                </div>
+            </td>
+          </tr>
+        </table>
+    </div>
+ 

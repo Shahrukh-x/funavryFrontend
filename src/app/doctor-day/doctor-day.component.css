@@ -5,37 +5,6 @@ body {
   font-family: Arial;
 }
 
-.header {
-  overflow: hidden;
-  background-color: #f1f1f1;
-  padding: 20px 10px;
-}
-
-.header a {
-  float: left;
-  color: black;
-  text-align: center;
-  padding: 12px;
-  text-decoration: none;
-  font-size: 18px;
-  line-height: 25px;
-  border-radius: 4px;
-}
-
-.header a.logo {
-  font-size: 25px;
-  font-weight: bold;
-}
-
-.header a.active {
-  background-color: dodgerblue;
-  color: white;
-}
-
-.header-right {
-  float: right;
-}
-
 @media screen and (max-width: 500px) {
   .header a {
     float: none;
@@ -46,25 +15,6 @@ body {
     float: none;
   }
 }
-
-
-
-table, thead{
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-  border: 1px solid black;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: center;
-}
-
-/*tr:nth-child(even) {*/
-/*background-color: #dddddd;*/
-/*}*/
-
 
 .dropbtn {
   background-color: #4CAF50;
@@ -78,12 +28,6 @@ td, th {
   position: relative;
   display: inline-block;
 }
-
-.Resizable{
-  resize: vertical;
-  overflow: auto;
-}
-
 
 .dropdown-content {
   display: none;
@@ -100,6 +44,46 @@ td, th {
   text-decoration: none;
   display: block;
 }
+
+
+.event-container{
+  height: 100%;
+  width: inherit;
+  resize: vertical;
+  /* border: 1px black solid; */
+}
+
+.event{
+  position: relative;
+  width: inherit;
+  background-color:rgb(120, 120, 214);
+  border: 3px solid rgb(32, 32, 206);
+  border-radius: 8px;
+  color: white;
+  font-size: 10px;
+  text-align: left;
+  opacity:0.7;
+}
+
+.event button{
+  border: none;
+  margin: 0 auto;
+  padding:0%;
+  display: block;
+  background: none;
+  color: white;
+  opacity: 0;
+  line-height: 11px;
+  position: relative;
+  text-align: center;
+}
+
+mwlResizable {
+  box-sizing: border-box;
+}
+
+.event:hover .eventbtn {opacity: 1;}
+
 
 .dropdown-content a:hover {background-color: #ddd;}
 

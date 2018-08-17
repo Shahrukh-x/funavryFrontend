@@ -7,7 +7,7 @@ import * as moment from 'moment';
   styleUrls: ['./doctor-week.component.css']
 })
 export class DoctorWeekComponent implements OnInit {
-
+  unitHeight = 40;
   DoctorBox = 'Select Doctor';
   AllDoctors;
   Year = 2018;
@@ -19,6 +19,7 @@ export class DoctorWeekComponent implements OnInit {
   weeks;
   MDays;
   FullHours;
+  events;
 
   constructor() {
   }
@@ -53,6 +54,7 @@ export class DoctorWeekComponent implements OnInit {
     this.AllDoctors = ['Dr.shahrukh', 'Dr. Machine Gun', 'Dr.Alanto', 'Dr.Howdy', 'Dr.GoldenDragon'];
     this.weeks = moment.weekdays();
     this.eventsD1 = ['9:30-10:30', '10:30-11:30', '12:30-1:30', '2:30-3:30'];
+    this.events = [4];
     this.Doctors = [];
     this.speciality = ['1', '1', '2'];
     this.MonthName = moment().month(this.Month).format('MMMM');
@@ -79,6 +81,19 @@ export class DoctorWeekComponent implements OnInit {
     }
   }
 
+  
+  hasEvent(i) {
+    for (let j = 0; j < this.events.length; j++) {
+      if (this.events[j] === i) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  createEvent(i) {
+    this.events.push(i);
+  }
 
   UpdateDoctor(Doc) {
     this.DoctorBox =  Doc;

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Renderer2, ElementRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ResizableDivDirective } from './resizable-div.directive';
 import * as moment from 'moment';
 
 @Component({
@@ -7,10 +8,9 @@ import * as moment from 'moment';
   styleUrls: ['./doctor-day.component.css']
 })
 export class DoctorDayComponent implements OnInit {
-
-
-
+  @ViewChild(ResizableDivDirective) res: ResizableDivDirective;
   DoctorBox = 'Select Doctor';
+  IsClickedVar;
   AllClincis;
   AllDoctors;
   Doctors;
@@ -18,11 +18,14 @@ export class DoctorDayComponent implements OnInit {
   TodayDate;
   eventsD1;
   FullHours;
+  unitHeight = 40;
+  events;
 
-  constructor() {
+  constructor(private renderer: Renderer2, private el: ElementRef) {
   }
 
   ngOnInit() {
+    this.IsClickedVar = false;
     this.FullHours = ['00:00 ',
       '01:00  ',
       '02:00  ',
@@ -51,6 +54,7 @@ export class DoctorDayComponent implements OnInit {
     ];
     this.Doctors = [];
     this.clinics = [];
+    this.events = [4];
     this.eventsD1 = ['9:00-10:00', '2:00-3:00'];
     this.AllClincis = ['Ordopedix', 'Chiropractic', 'Medical', 'Cinalytica'];
     this.AllDoctors = ['Dr.shahrukh', 'Dr.Machine Gun', 'Dr.Alanto', 'Dr.Howdy', 'Dr.GoldenDragon'];
@@ -76,6 +80,19 @@ export class DoctorDayComponent implements OnInit {
         this.Doctors.splice(i, 1);
       }
     }
+  }
+
+  hasEvent(i) {
+    for (let j = 0; j < this.events.length; j++) {
+      if (this.events[j] === i) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  createEvent(i) {
+    this.events.push(i);
   }
 
   UpdateDoctor(Doc) {
